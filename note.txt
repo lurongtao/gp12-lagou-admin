@@ -1,0 +1,9 @@
+FE: front-end
+BE: back-end
+
+ssh-keygen -t rsa -C lurongtao@126.com
+基于token认证的原理：
+1、将公钥上传到github上
+2、当登录的时 输入用户名和密码，密码会通过git做加密（用私钥加密）
+3、github用公钥解密
+4、实现了不用每次输入用户名和密码了
