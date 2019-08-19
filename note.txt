@@ -7,3 +7,5 @@ ssh-keygen -t rsa -C lurongtao@126.com
 2、当登录的时 输入用户名和密码，密码会通过git做加密（用私钥加密）
 3、github用公钥解密
 4、实现了不用每次输入用户名和密码了
+
+npx: 优先到本地node_modules里查找模块
