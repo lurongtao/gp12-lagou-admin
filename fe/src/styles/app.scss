@@ -1,7 +1,15 @@
 $layout: inline-block;
 
-#user-menu > a {
-  padding: 0;
+
+#user-menu {
+  height: 50px;
+  > a {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 // .dropdown-toggle {
