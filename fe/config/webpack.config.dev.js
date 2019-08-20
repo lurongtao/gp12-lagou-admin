@@ -21,17 +21,22 @@ module.exports = {
     port: 8000
   },
 
-  // loader们
+  // loader
   module: {
     rules: [
       {
         test: /\.art$/,
-        loader: "art-template-loader",
+        loader: 'art-template-loader',
+      },
+
+      {
+        test: /\.(scss|css)$/,
+        loader: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
 
-  // 插件们
+  // 插件
   plugins: [
     // 打包html+css+js
     new htmlWebpackPlugin({

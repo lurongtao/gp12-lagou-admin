@@ -1,0 +1,16 @@
+$layout: inline-block;
+
+#user-menu > a {
+  padding: 0;
+}
+
+// .dropdown-toggle {
+//   color: #fff;
+//   height: 50px;
+// }
+
+.hidden-xs {
+  display: $layout;
+  height: 100%;
+  line-height: 50px;
+}
