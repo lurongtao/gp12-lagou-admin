@@ -12,8 +12,10 @@ router.use(activeNavUtil)
 
 router.route('/', homeController.render)
 router.route('/position', positionController.render)
+router.route('/position_add', positionController.add)
+router.route('/position_edit', positionController.edit)
 
-router.redirect('/')
+router.redirect('/position')
 
 // 渲染用户信息的模板
 userController.render()

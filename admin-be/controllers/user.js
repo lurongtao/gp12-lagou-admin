@@ -72,7 +72,6 @@ module.exports = {
 
     let username = req.session.username
     if (username) {
-      next()
       res.render('succ', {
         data: JSON.stringify({
           msg: '用户有权限',
@@ -89,6 +88,7 @@ module.exports = {
   },
 
   async signout(req, res, next) {
+    res.set('content-type', 'application/json; charset=utf-8')
     req.session = null
     res.render('succ', {
       data: JSON.stringify({

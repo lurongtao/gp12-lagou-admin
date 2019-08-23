@@ -19,7 +19,6 @@ export default {
   isSignin() {
     return $.ajax({
       url: '/api/users/isSignin',
-      dataType: 'json',
       success(result) {
         return result
       }
@@ -45,7 +44,7 @@ export default {
       })
     })
 
-    $('#btn-signout').on('click', () => {
+    $('#user-menu').on('click', '#btn-signout', () => {
       $.ajax({
         url: '/api/users/signout',
         success: this.bindEventSucc.bind(this),
@@ -69,11 +68,13 @@ export default {
         })
     
         $('#user-menu').html(html)
+        // 为了登录准备的
+        _type = ''
       } else {
         alert(result.data.msg)
       }
     } else {
-      location.reload() 
+      location.reload()
     }
   }
 }

@@ -9,3 +9,10 @@ ssh-keygen -t rsa -C lurongtao@126.com
 4、实现了不用每次输入用户名和密码了
 
 npx: 优先到本地node_modules里查找模块
+
+type: get, post, put, patch, delete
+- get: 获取数据
+- post: 添加新数据
+- put: 修改数据（依照传入的数据，全部覆盖修改）
+- patch: 修改数据（只修改传入的数据，其他的数据不变）
+- delete: 删除数据
