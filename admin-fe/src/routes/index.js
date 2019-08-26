@@ -10,12 +10,12 @@ const router = new SMERouter('router-view', 'hash')
 
 router.use(activeNavUtil)
 
-router.route('/', homeController.render)
+router.route('/home', homeController.render)
 router.route('/position', positionController.render)
 router.route('/position_add', positionController.add)
 router.route('/position_edit', positionController.edit)
 
-router.redirect('/position')
+router.redirect('/home')
 
 // 渲染用户信息的模板
 userController.render()

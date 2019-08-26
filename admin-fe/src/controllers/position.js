@@ -45,7 +45,7 @@ function loadData(pageNo, res) {
           pageCount: _.range(Math.ceil(result.data.total / COUNT))
         }))
       } else {
-        res.go('/')
+        res.go('/home')
       }
     }
   })
