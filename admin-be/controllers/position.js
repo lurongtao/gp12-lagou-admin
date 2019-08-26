@@ -26,13 +26,14 @@ module.exports = {
   async save(req, res, next) {
     let result = await posModel.save({
       ...req.body,
+      companyLogo: req.filename,
       createTime: moment().format('YYYY-MM-DD hh:mm:ss')
     })
     if (result) {
       res.render('succ', {
         data: JSON.stringify({
           msg: '数据添加成功.'
-        })
+        })  
       })
     } else {
       res.render('fail', {
@@ -43,14 +44,21 @@ module.exports = {
     }
   },
 
-  async put(req, res, next) {
-    let result = await posModel.put({
+  async patch(req, res, next) {
+    console.log(req.filename)
+    let data = {
       ...req.body,
       createTime: moment().format('YYYY-MM-DD hh:mm:ss')
-    })
+    }
+    
+    if (req.filename) {
+      data['companyLogo'] = req.filename
+    }
+
+    let result = await posModel.patch(data)
     res.render('succ', {
       data: JSON.stringify({
-        msg: '数据修改成功.'  
+        msg: '数据修改成功.'
       })
     })
   },
@@ -60,6 +68,17 @@ module.exports = {
     res.render('succ', {
       data: JSON.stringify({
         msg: '数据删除成功.'  
+      })
+    })
+  },
+
+  async search(req, res, next) {
+    let {keywords} = req.body
+    let list = await posModel.search(keywords)
+    res.render('succ', {
+      data: JSON.stringify({
+        list,
+        total: -1
       })
     })
   }

@@ -16,3 +16,5 @@ type: get, post, put, patch, delete
 - put: 修改数据（依照传入的数据，全部覆盖修改）
 - patch: 修改数据（只修改传入的数据，其他的数据不变）
 - delete: 删除数据
+
+https://www.cnblogs.com/jpfss/p/8963662.html

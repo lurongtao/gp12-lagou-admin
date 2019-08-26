@@ -30,7 +30,7 @@
       {{each list}}
       <tr>
         <td>{{$index+1}}</td>
-        <td><img width="50" height="50" src="http://placehold.it/50x50" alt=""></td>
+        <td><img width="50" height="50" src="http://localhost:3000/uploads/{{$value['companyLogo']}}" alt=""></td>
         <td>{{$value['companyName']}}</td>
         <td>{{$value['positionName']}}</td>
         <td>{{$value['city']}}</td>
@@ -51,16 +51,16 @@
     </table>
   </div>
 
-  {{if total > 0 }}
+  {{if total > 0 && showPage }}
     <div class="box-footer clearfix">
       <ul id="page" class="pagination pagination-sm no-margin pull-right">
-        <li><a href="#">&laquo;</a></li>
+        <li id="prev"><a href="javascript: void(0)">&laquo;</a></li>
         {{each pageCount }}
         <li data-index="{{$index}}" class="{{if pageNo == $index}}active{{/if}}">
-          <a href="#">{{$value+1}}</a>
+          <a href="javascript: void(0)">{{$value+1}}</a>
         </li>
         {{/each}}
-        <li><a href="#">&raquo;</a></li>
+        <li data-pagecount="{{pageCount.length}}" id="next"><a href="javascript: void(0)">&raquo;</a></li>
       </ul>
     </div>
   {{/if}}
