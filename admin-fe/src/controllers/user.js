@@ -19,6 +19,9 @@ export default {
   isSignin() {
     return $.ajax({
       url: '/api/users/isSignin',
+      headers: {
+        'x-access-token': localStorage.getItem('x-access-token')
+      },
       success(result) {
         return result
       }
@@ -45,11 +48,13 @@ export default {
     })
 
     $('#user-menu').on('click', '#btn-signout', () => {
-      $.ajax({
-        url: '/api/users/signout',
-        success: this.bindEventSucc.bind(this),
-        error: this.bindEventErr.bind(this)
-      })
+      // $.ajax({
+      //   url: '/api/users/signout',
+      //   success: this.bindEventSucc.bind(this),
+      //   error: this.bindEventErr.bind(this)
+      // })
+      localStorage.removeItem('x-access-token')
+      location.reload()
     })
   },
 
@@ -57,7 +62,7 @@ export default {
     
   },
 
-  bindEventSucc(result) {
+  bindEventSucc(result, textStatus, jqXHR) {
     if (_type === 'btn-signup') {
       alert(result.data.msg)
     } else if (_type === 'btn-signin') {
@@ -70,6 +75,9 @@ export default {
         $('#user-menu').html(html)
         // 为了登录准备的
         _type = ''
+
+        let token = jqXHR.getResponseHeader('x-access-token')
+        localStorage.setItem('x-access-token', token)
       } else {
         alert(result.data.msg)
       }

@@ -1,5 +1,6 @@
 const userModel = require('../models/user')
 const toolsUtil = require('../utils/tools')
+const tokenUtil = require('../utils/token')
 
 module.exports = {
   async signup(req, res, next) {
@@ -39,12 +40,18 @@ module.exports = {
     res.set('content-type', 'application/json;charset=utf-8')
 
     let { username, password } = req.body
-
+    
     let result = await userModel.findOne(username)
-
+    
     if (result) {
       if (await toolsUtil.compare(password, result.password)) {
-        req.session.username = username
+        
+        let token = tokenUtil.sign({
+          username
+        })
+
+        res.set('X-Access-Token', token)
+
         res.render('succ', {
           data: JSON.stringify({
             msg: '用户登录成功.',
@@ -69,13 +76,13 @@ module.exports = {
 
   async isSignin(req, res, next) {
     res.set('content-type', 'application/json; charset=utf-8')
-
-    let username = req.session.username
-    if (username) {
+    let token = req.get('x-access-token')
+    let result = await tokenUtil.verify(token)
+    if (result) {
       res.render('succ', {
         data: JSON.stringify({
-          msg: '用户有权限',
-          username
+          msg: '登录成功.',
+          username: result.username
         })
       })
     } else {
