@@ -15,7 +15,7 @@ module.exports = {
   devServer: {
     contentBase: './dev',
     port: 8000,
-    host: 'localhost',
+    host: '10.60.15.78',
     proxy: {
       '/api': {
         target: 'http://localhost:3000',

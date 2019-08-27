@@ -3,14 +3,16 @@ const strRandom = require('string-random')
 
 const multer = require('multer')
 
-let filename = ''
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.resolve(__dirname, '../public/uploads/'))
   },
   filename: function (req, file, cb) {
-    filename = strRandom(8) + '-' + Date.now() + file.originalname.substr(file.originalname.lastIndexOf('.'))
+    let filename = strRandom(8) + '-' + Date.now() + file.originalname.substr(file.originalname.lastIndexOf('.'))
+    
+    // 用户提交了图片，需要把图片文件名传到下个中间件入库
+    req.filename = filename
+
     cb(null, filename)
   }
 })
@@ -40,7 +42,12 @@ module.exports = (req, res, next) => {
       })
     } else {
       // 中间件栈传参
-      req.filename = filename
+      // 用户在前端没有选择图片
+      if (req.body['companyLogo'] === '') {
+        // 删除前端提交过来的空的companyLogo
+        delete req.body['companyLogo']
+      }
+
       next()
     }
   })

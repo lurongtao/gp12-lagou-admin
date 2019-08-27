@@ -26,14 +26,14 @@ module.exports = {
   async save(req, res, next) {
     let result = await posModel.save({
       ...req.body,
-      companyLogo: req.filename,
+      companyLogo: req.filename || '',
       createTime: moment().format('YYYY-MM-DD hh:mm:ss')
     })
     if (result) {
       res.render('succ', {
         data: JSON.stringify({
           msg: '数据添加成功.'
-        })  
+        })
       })
     } else {
       res.render('fail', {
@@ -45,12 +45,12 @@ module.exports = {
   },
 
   async patch(req, res, next) {
-    console.log(req.filename)
+
     let data = {
       ...req.body,
       createTime: moment().format('YYYY-MM-DD hh:mm:ss')
     }
-    
+
     if (req.filename) {
       data['companyLogo'] = req.filename
     }

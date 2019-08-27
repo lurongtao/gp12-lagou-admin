@@ -12,6 +12,9 @@ function remove(id, res) {
     data: {
       id
     },
+    headers: {
+      'x-access-token': localStorage.getItem('x-access-token')
+    },
     success(result) {
       if (result.ret) {
         // res.go('/position?_=' + new Date().getTime())
@@ -29,6 +32,9 @@ function loadData(pageNo, res) {
     data: {
       start,
       count: COUNT
+    },
+    headers: {
+      'x-access-token': localStorage.getItem('x-access-token')
     },
     success(result) {
       if (result.ret) {
@@ -120,6 +126,9 @@ export default {
       $('#possave').ajaxSubmit({
         url: '/api/position/save',
         type: 'POST',
+        headers: {
+          'x-access-token': localStorage.getItem('x-access-token')
+        },
         clearForm: true,
         success(result) {
           if (result.ret) {
@@ -139,6 +148,9 @@ export default {
       data: {
         id: req.body.id,
       },
+      headers: {
+        'x-access-token': localStorage.getItem('x-access-token')
+      },
       success(result) {
         res.render(positionEditView(result.data))
 
@@ -150,6 +162,9 @@ export default {
           $('#posedit').ajaxSubmit({
             url: '/api/position/patch',
             type: 'PATCH',
+            headers: {
+              'x-access-token': localStorage.getItem('x-access-token')
+            },
             success(result) {
               if (result.ret) {
                 res.back()
